@@ -5,35 +5,33 @@
     <script type="text/javascript" src="lib/matrix.js"></script>
     <script type="text/javascript" src="lib/gl-matrix-lib.js"></script>
     <script type="text/javascript" src="lib/math.js"></script>
-    <!-- <script type="text/javascript" src="lib/jquery.js"></script> -->
+    <script type="text/javascript" src="lib/jquery.js"></script>
   </head>
   <body>
     <div id="box-container"></div>
-      <container id="output-box" class="big-box">
-        <canvas
-          id="canvas"
-          width="1200"
-          height="900"
-          style="border: 1px solid #b80000"
-        ></canvas>
-        <canvas
-          id="text"
-          width="1200"
-          height="900"
-          style="border: 1px solid #9200f3"
-        ></canvas>
-      </container>
+    <div id="output-box" class="big-box">
+      <canvas
+        id="canvas"
+        width="1200"
+        height="900"
+        style="border: 1px solid #b80000"
+      ></canvas>
+      <canvas
+        id="text"
+        width="1200"
+        height="900"
+        style="border: 1px solid #9200f3"
+      ></canvas>
       <div id="input-box">
         Primitive
         <select id="plot-select">
           <option value="surface">Surface</option>
           <option value="points">Points</option>
-          <option value="lines">Line Strip</option>
         </select>
         Function
         <select id="function-select">
-          <option value="sin(x)">sin(x)</option>
           <option value="cos(x^2+z^2)">cos(x^2+z^2)</option>
+          <option value="sin(x)">sin(x)</option>
         </select>
         <br><br>minX <input id="minX" type="number" value="-3" /> 
         <br><br>maxX <input
@@ -91,5 +89,5 @@
   <!-- <script type="text/javascript" src="./eventHandler.js"></script> -->
   <!-- <script type="text/javascript" src="./camera.js"></script> -->
   <!-- <script type="text/javascript" src="./renderer.js"></script> -->
-  <script type="text/javascript" src="./app.js" defer></script>
+  <script type="text/javascript" src="./App.js" defer></script>
 </html>

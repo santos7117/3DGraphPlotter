@@ -1,23 +1,13 @@
 var mat = {
   translation: function (x, y, z) {
-    return [
-      1, 0, 0, 0, 
-      0, 1, 0, 0, 
-      0, 0, 1, 0, 
-      x, y, z, 1
-    ]
+    return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1]
   },
 
   perspective: function (fieldOfViewInRadians, near, far, ratio) {
     var a = 1 / Math.tan(0.5 * fieldOfViewInRadians)
     var b = 2.0 / (far - near)
 
-    return [
-      a * ratio, 0, 0, 0, 
-      0, a, 0, 0, 
-      0, 0, b, 1, 
-      0, 0, -1, near
-    ]
+    return [a * ratio, 0, 0, 0, 0, a, 0, 0, 0, 0, b, 1, 0, 0, -1, near]
   },
 
   xRotation: function (angleInRadians) {
@@ -110,7 +100,7 @@ var mat = {
     return out
   },
 
-  // return vector normal to triangle surface
+  // return vectro normal to triangle surface
   // a,b,c are points from R^3
   normal: function (a, b, c) {
     // triangle a,b,c

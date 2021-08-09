@@ -35,7 +35,7 @@ function getSurface(minX, maxX, minZ, maxZ, n, func) {
     return [realX, y, realZ]
   }
 
-  addNormal = function (triangle) {
+  addNormal = function () {
     let norm = mat.normal(triangle[0], triangle[1], triangle[2])
     for (let j = 0; j < 3; j++) {
       for (let k = 0; k < 3; k++) {
@@ -43,10 +43,10 @@ function getSurface(minX, maxX, minZ, maxZ, n, func) {
       }
     }
   }
-console.log("Sampling...")
+
   for (let x = 0; x < n; x++) {
     for (let z = 0; z < n; z++) {
-      let triangle = [
+      var triangle = [
         createSamples(x + 1, z),
         createSamples(x, z),
         createSamples(x, z + 1),
@@ -61,6 +61,6 @@ console.log("Sampling...")
       addNormal(triangle)
     }
   }
-console.log("Samples: ", surface.length)
+
   return {surface, normals, minY, maxY}
 }

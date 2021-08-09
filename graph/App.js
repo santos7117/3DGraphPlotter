@@ -8,9 +8,9 @@ function main() {
   const ambient_loc = gl.getUniformLocation(shaderProg, "u_ambientStrength")
 
   // code above is for initialization
-  let model_mat = []
+  let transform = []
   let ratio = canvas.height / canvas.width
-  let perspective = mat.perspective(Math.PI / 3, 2.6, 20, ratio)
+  let perspective = mat.perspective(Math.PI / 2.1, 2.6, 20, ratio)
 
   let maxX = 1
   let maxY = 1
@@ -26,10 +26,10 @@ function main() {
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     gl.disable(gl.CULL_FACE);
 
-    const mvp_mat = mat.multiply(perspective, model_mat)
+    var finalTransform = mat.multiply(perspective, transform)
     // calculate text coords
     write = function (text, x, y, z) {
-      let vec = mat.multiplyVector(mvp_mat, [x, y, z, 1])
+      let vec = mat.multiplyVector(finalTransform, [x, y, z, 1])
 
       // gl also divides by fourth element
       vec[0] /= vec[3]
@@ -69,7 +69,7 @@ function main() {
       gl.vertexAttribPointer(normal_loc, size, type, false, stride, offset)
       gl.enableVertexAttribArray(normal_loc)
 
-      gl.uniformMatrix4fv(transform_loc, false, mvp_mat)
+      gl.uniformMatrix4fv(transform_loc, false, finalTransform)
       gl.uniform4fv(color_loc, object.color)
       gl.uniform1f(fading_loc, object.fading)
       gl.uniform1f(ambient_loc, object.ambientStrength)
@@ -80,7 +80,10 @@ function main() {
     drawObject(CoordAxes)
   }
 
-  const functions = {}
+  var functions = {}
+  functions["x^2+z^2"] = function (x, y) {
+    return x * x + y * y
+  }
   functions["sin(x)"] = function (x, y) {
     return Math.sin(x)
   }
@@ -95,19 +98,10 @@ function main() {
     let maxX = parseInt(maxXInput.value)
     let minZ = parseInt(minZInput.value)
     let maxZ = parseInt(maxZInput.value)
-    switch (styleSel.value) {
-      case "points":
-        GraphObject.primitive = gl.POINTS
-        break;
-      
-      case "lines":
-        GraphObject.primitive = gl.LINES
-        break;
-
-      default:
-        GraphObject.primitive = gl.TRIANGLES
-        break;
-      
+    if (styleSel.value == "points") {
+      GraphObject.primitive = gl.POINTS
+    } else {
+      GraphObject.primitive = gl.TRIANGLES
     }
 
     let graph = getSurface(minX, maxX, minZ, maxZ, SAMPLE_COUNT, func)
@@ -142,9 +136,9 @@ function main() {
       (k * 2) / (maxY - minY),
       (k * 2) / (maxZ - minZ)
     )
-    model_mat = mat.multiply(scale, translation)
+    transform = mat.multiply(scale, translation)
     let tilt = mat.yRotation(Math.PI / 4)
-    model_mat = mat.multiply(tilt, model_mat)
+    transform = mat.multiply(tilt, transform)
 
     // set ambient strength
     GraphObject.ambientStrength = ambientRange.value
@@ -164,16 +158,16 @@ function main() {
       const key = event.key
       switch (key) {
         case "w":
-          model_mat = mat.multiply(mat.xRotation(ROTATION_ANGLE), model_mat)
+          transform = mat.multiply(mat.xRotation(ROTATION_ANGLE), transform)
           break
         case "s":
-          model_mat = mat.multiply(mat.xRotation(-ROTATION_ANGLE), model_mat)
+          transform = mat.multiply(mat.xRotation(-ROTATION_ANGLE), transform)
           break
         case "a":
-          model_mat = mat.multiply(mat.yRotation(ROTATION_ANGLE), model_mat)
+          transform = mat.multiply(mat.yRotation(ROTATION_ANGLE), transform)
           break
         case "d":
-          model_mat = mat.multiply(mat.yRotation(-ROTATION_ANGLE), model_mat)
+          transform = mat.multiply(mat.yRotation(-ROTATION_ANGLE), transform)
           break
         case "r":
           draw()
