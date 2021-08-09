@@ -22,6 +22,7 @@ const minZInput = document.getElementById("minZ")
 const maxZInput = document.getElementById("maxZ")
 const fadingRange = document.getElementById("fadingRange")
 const ambientRange = document.getElementById("ambientRange")
+const resolutionRange = document.getElementById("resolutionRange")
 
 const ROTATION_ANGLE = Math.PI / 10
 const SAMPLE_COUNT = 250

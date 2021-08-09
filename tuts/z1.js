@@ -83,12 +83,12 @@ function main() {
     let midY = 0; //(minY + maxY) / 2;
     let midZ = 0; //(minZ + maxZ) / 2;
     coordsSys.data = [
-      minX,midY,midZ,
-      maxX,midY,midZ,
-      midX,minY,midZ,
-      midX,maxY,midZ,
-      midX,midY,minZ,
-      midX,midY,maxZ ];
+      minX, midY, midZ,
+      maxX, midY, midZ,
+      midX, minY, midZ,
+      midX, maxY, midZ,
+      midX, midY, minZ,
+      midX, midY, maxZ ];
     coordsSys.length = coordsSys.data.length;
     gl.bindBuffer(gl.ARRAY_BUFFER, coordsSys.buff );
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(coordsSys.data), gl.STATIC_DRAW);

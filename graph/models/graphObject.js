@@ -13,7 +13,7 @@ function getSurface(minX, maxX, minZ, maxZ, n, func) {
   let normals = []
   let stepX = (maxX - minX) / n
   let stepZ = (maxZ - minZ) / n
-  let minY = Number.MAX_VALUE
+  let minY =  Number.MAX_VALUE
   let maxY = -Number.MAX_VALUE
 
   const createSamples = (x, z) => {

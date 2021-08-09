@@ -178,8 +178,6 @@ function main() {
         case "r":
           draw()
           break
-        case " ":
-          break
         default:
           return
       }

@@ -4,6 +4,7 @@ CoordAxes.setData = function (minX, maxX, minY, maxY, minZ, maxZ) {
   let midY = 0
   let midZ = 0
 
+  CoordAxes.buff = gl.createBuffer()
   CoordAxes.data = [
     minX, midY, midZ,
     maxX, midY, midZ,
@@ -23,9 +24,8 @@ CoordAxes.setData = function (minX, maxX, minY, maxY, minZ, maxZ) {
 }
 CoordAxes.dims = 3
 CoordAxes.primitive = gl.LINES
-CoordAxes.buff = gl.createBuffer()
 
-CoordAxes.color = [0, 1, 0.7, 1]
+CoordAxes.color = [0.5, 0.4, 0.8, 1]
 CoordAxes.fading = 0.0
 CoordAxes.ambientStrength = 0.5
 CoordAxes.normalsData = [
@@ -37,3 +37,9 @@ CoordAxes.normalsData = [
   0.0, 0.0, 1.0,
 ]
 CoordAxes.normalsBuff = gl.createBuffer()
+gl.bindBuffer(gl.ARRAY_BUFFER, CoordAxes.normalsBuff)
+gl.bufferData(
+  gl.ARRAY_BUFFER, 
+  new Float32Array(CoordAxes.normalsData),
+  gl.STATIC_DRAW
+)
