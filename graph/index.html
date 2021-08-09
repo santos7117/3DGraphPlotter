@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="lib/matrix.js"></script>
+    <script type="text/javascript" src="lib/gl-matrix-lib.js"></script>
+    <script type="text/javascript" src="lib/math.js"></script>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+  </head>
+  <body>
+    <div id="box-container"></div>
+    <div id="output-box" class="big-box">
+      <canvas
+        id="canvas"
+        width="1200"
+        height="900"
+        style="border: 1px solid #b80000"
+      ></canvas>
+      <canvas
+        id="text"
+        width="1200"
+        height="900"
+        style="border: 1px solid #9200f3"
+      ></canvas>
+      <div id="input-box">
+        Primitive
+        <select id="plot-select">
+          <option value="surface">Surface</option>
+          <option value="points">Points</option>
+        </select>
+        Function
+        <select id="function-select">
+          <option value="cos(x^2+z^2)">cos(x^2+z^2)</option>
+          <option value="sin(x)">sin(x)</option>
+        </select>
+        <br><br>minX <input id="minX" type="number" value="-3" /> 
+        <br><br>maxX <input
+          id="maxX"
+          type="number"
+          value="3"
+        />
+        <br><br>minZ <input id="minZ" type="number" value="-3" /> 
+        <br><br>maxZ <input
+          id="maxZ"
+          type="number"
+          value="3"
+        />
+        <br><br>Fading <input
+          type="range"
+          min="0"
+          max="1"
+          value="0"
+          class="slider"
+          id="fadingRange"
+          step="0.05"
+        />
+        <br><br>Ambient <input
+          type="range"
+          min="0"
+          max="1"
+          value="0"
+          class="slider"
+          id="ambientRange"
+          step="0.05"
+        />
+        <br><br>Resolution <input
+          type="range"
+          min="0"
+          max="1"
+          value="0"
+          class="slider"
+          id="resolutionRange"
+          step="0.05"
+        />
+        <br><br><br><button id="draw-button" class="button">Plot!!! </button>
+      </div>
+    </div>
+  </body>
+  
+  <script type="text/javascript" src="./init.js"></script>
+  <script type="text/javascript" src="./models/coordinateAxes.js"></script>
+  <script type="text/javascript" src="./models/graphObject.js"></script>
+  <!-- <script type="text/javascript" src="./samplesGenerator.js"></script> -->
+  <script type="text/javascript" src="./shaders/vertex.js"></script>
+  <script type="text/javascript" src="./shaders/fragment.js"></script>
+  <script type="text/javascript" src="./shaderHandler.js"></script>
+  <!-- <script type="text/javascript" src="./vobModel.js"></script> -->
+  <!-- <script type="text/javascript" src="./errorHandler.js" > </script> -->
+  <!-- <script type="text/javascript" src="./eventHandler.js"></script> -->
+  <!-- <script type="text/javascript" src="./camera.js"></script> -->
+  <!-- <script type="text/javascript" src="./renderer.js"></script> -->
+  <script type="text/javascript" src="./App.js" defer></script>
+</html>
