@@ -53,7 +53,7 @@ function getSurface(minX,maxX,minZ,maxZ,n,func){
 }
 
 var rotationStep = Math.PI / 20;
-var sampleCount = 500;
+var sampleCount = 100;
 var maxFading = 2;
 
 function main() {
