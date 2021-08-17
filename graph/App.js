@@ -1,4 +1,5 @@
 function main() {
+
   gl.useProgram(shaderProg)
   const position_loc = gl.getAttribLocation(shaderProg, "a_position")
   const normal_loc = gl.getAttribLocation(shaderProg, "a_normal")
@@ -7,11 +8,24 @@ function main() {
   const fading_loc = gl.getUniformLocation(shaderProg, "u_fading")
   const ambient_loc = gl.getUniformLocation(shaderProg, "u_ambientStrength")
 
-  // code above is for initialization
   let model_mat = []
-  let ratio = canvas.height / canvas.width
-  let perspective = mat.perspective(Math.PI / 3, 2.6, 20, ratio)
-
+  let view_mat = mat.perspective(Math.PI / 3, 2.6, 20, ASPECT_RATIO)
+//   let view_mat = mat4.create()
+//   let proj_mat = mat4.create()
+// // initialize camera view
+// mat4.lookAt(
+//   view_mat,
+//   INIT_EYE_POS,    // eye
+//   CENTER,          // center
+//   Y_AXIS,          // up
+// )
+// mat4.perspective(
+//   proj_mat,
+//   PROJECTION_ANGLE,
+//   ASPECT_RATIO,
+//   NEAR_Z,
+//   FAR_Z
+// )
   let maxX = 1
   let maxY = 1
   let maxZ = 1
@@ -26,7 +40,7 @@ function main() {
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     gl.disable(gl.CULL_FACE);
 
-    const mvp_mat = mat.multiply(perspective, model_mat)
+    const mvp_mat = mat.multiply(view_mat, model_mat)
     // calculate text coords
     write = function (text, x, y, z) {
       let vec = mat.multiplyVector(mvp_mat, [x, y, z, 1])
@@ -81,11 +95,14 @@ function main() {
   }
 
   const functions = {}
-  functions["sin(x)"] = function (x, y) {
+  functions["sin(x)"] = function (x, z) {
     return Math.sin(x)
   }
-  functions["cos(x^2+z^2)"] = function (x, y) {
-    return Math.cos(x * x + y * y)
+  functions["sin(5x)*cos(5z)/5"] = function (x, z) {
+    return Math.sin(5*x)*Math.cos(5*z)/5
+  }
+  functions["cos(x^2+z^2)"] = function (x, z) {
+    return Math.cos(x * x + z * z)
   }
 
   const draw = function () {
@@ -154,7 +171,6 @@ function main() {
     redraw()
   }
   document.getElementById("draw-button").onclick = draw
-
   draw()
 
   // controls
